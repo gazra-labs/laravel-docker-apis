@@ -1,0 +1,178 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Order APIs",
+        "description": "Order APIs",
+        "version": "1.0"
+    },
+    "paths": {
+        "/orders?page=:page&limit=:limit": {
+            "get": {
+                "tags": [
+                    "OrderList"
+                ],
+                "summary": "Get the list of orders",
+                "description": "To get the list of orders with id, status and distance in meter",
+                "operationId": "orderList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number and it must be a valid integer with minimum 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit of records to fetch, it must be a valid interger with minimum 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Invalid data provided"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/orders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "To create order",
+                "description": "Create orders and store driver distance of given coordinates",
+                "operationId": "orderCreate",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "origin": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "destination": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "origin": [
+                                        "28.6019042",
+                                        "77.1848588"
+                                    ],
+                                    "destination": [
+                                        "28.5974392",
+                                        "77.2016173"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull"
+                    },
+                    "400": {
+                        "description": "Bad requests"
+                    },
+                    "422": {
+                        "description": "Invalid data provided"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                }
+            }
+        },
+        "/orders/{id}": {
+            "patch": {
+                "tags": [
+                    "OrderTaken"
+                ],
+                "summary": "Take Order",
+                "description": "Change status from unassigned to taken",
+                "operationId": "orderTaken",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of an order, should be interger and valid.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "status": "TAKEN"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull"
+                    },
+                    "400": {
+                        "description": "Method not allowed"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    },
+                    "409": {
+                        "description": "Order has been taken already."
+                    },
+                    "422": {
+                        "description": "Invalid data provided"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "501": {
+                        "description": "Order is not taken, please try again."
+                    }
+                }
+            }
+        }
+    }
+}
