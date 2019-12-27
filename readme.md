@@ -6,12 +6,10 @@ An simple APIs with Shell Script, Docker and Laravel
 Follow these simple steps to working API project
 1. Clone the repository 
    
-   `mkdir docker-laravel-api`
-   
-   `cd docker-laravel-api`
-   
-   `git clone https://github.com/gazra-labs/docker-laravel-apis.git . `
-    
+   `git clone https://github.com/gazra-labs/laravel-docker-apis.git`
+
+   `cd laravel-docker-apis`
+
 2. Run `start.sh` file, the file will execure following commands
     
     Above start.sh file will run following commands 
@@ -46,11 +44,11 @@ Follow these simple steps to working API project
 	
     g. Performing PHPUnit Tests 
     
-    `sleep 150`
+    `sleep 120`
     
     `docker exec laravel-app ./vendor/bin/phpunit`
 
-5. Hit the URL and you will find the working project. Working URL would be http://0.0.0.0:8080 
+5. Hit the URL and you will find the working project. Working URL would be http://0.0.0.0:8000 
 
 
 
@@ -61,10 +59,10 @@ There are 3 APIs with different methods. To list, create and update order
 
 Parameters | Values | Remarks
 --- | --- | ---
-URL | `0.0.0.0:8080` | Please check `docker ps -a` to confirm current working url
+URL | `0.0.0.0:8000` | Please check `docker ps -a` to confirm current working url
 API Path | {URL} | 
 End Point | {URL}/orders?page=:page&limit=:limit | Example of list orders
-Example Full URI | http://0.0.0.0:8080/api/orders?page=:page&limit=:limit | 
+Example Full URI | http://0.0.0.0:8000/api/orders?page=:page&limit=:limit | 
 API Documentation | {URL}/api/documentation | 
 Code Coverage | {URL}/CodeCoverage/ | 
 
