@@ -228,4 +228,14 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | GOOGLE API Veriables
+    |--------------------------------------------------------------------------
+    |
+    | Fetching Env variable for Google Distance Matrix API
+    |
+    */
+    'GOOGLE_API_KEY'=> env('GOOGLE_API_KEY'),
+    'GOOGLE_API_URL'=> env('GOOGLE_API_URL'),
 ];
